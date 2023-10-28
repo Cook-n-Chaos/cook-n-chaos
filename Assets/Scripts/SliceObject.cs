@@ -36,15 +36,24 @@ public class SliceObject : MonoBehaviour
 
         SlicedHull hull = target.Slice(endSlicePoint.position, planeNormal);
 
-        if(hull != null)
+        SlicableObject targetSlicableObject = target.GetComponent<SlicableObject>();
+        if (targetSlicableObject.parentHolder.IncreaseSliceAmount())
+            return;
+
+        if (hull != null)
         {
             GameObject upperHull = hull.CreateUpperHull(target, crossSectionMaterial);
+            upperHull.transform.parent = targetSlicableObject.parentHolder.transform;
             SetupSlicedComponent(upperHull, crossSectionMaterial, mass);
 
             GameObject lowerHull = hull.CreateLowerHull(target, crossSectionMaterial);
+            lowerHull.transform.parent = targetSlicableObject.parentHolder.transform;
             SetupSlicedComponent(lowerHull, crossSectionMaterial, mass);
 
             StartCoroutine(SetSlicable(upperHull, lowerHull, 0.35f));
+
+            
+           
 
             Destroy(target);
         }
@@ -54,8 +63,11 @@ public class SliceObject : MonoBehaviour
     {
         Rigidbody rb = slicedObject.AddComponent<Rigidbody>();
         rb.mass = parentMass / 2 < 1 ? 1 : parentMass / 2;
+
         SlicableObject slicableObject = slicedObject.AddComponent<SlicableObject>();
+        slicableObject.parentHolder = slicableObject.transform.parent.GetComponent<SliceCounter>(); 
         slicableObject.slicedMaterial = parentSlicedMaterial;
+
         MeshCollider collider = slicedObject.AddComponent<MeshCollider>();
         slicableObject.AddComponent<XRGrabInteractable>();
         if(collider.sharedMesh.vertexCount >=4)
