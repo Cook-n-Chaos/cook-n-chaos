@@ -37,8 +37,14 @@ public class SliceObject : MonoBehaviour
         SlicedHull hull = target.Slice(endSlicePoint.position, planeNormal);
 
         SlicableObject targetSlicableObject = target.GetComponent<SlicableObject>();
-        if (targetSlicableObject.parentHolder.IncreaseSliceAmount())
+        SliceCounter counter = targetSlicableObject.parentHolder;
+        if (counter.IncreaseSliceAmount())
+        {
+            counter.ChangeObject(target.transform.position);
             return;
+        }
+          
+      
 
         if (hull != null)
         {
