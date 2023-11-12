@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386194710839492246}
+  - component: {fileID: 8989610308338164506}
   m_Layer: 0
   m_Name: CarrotSlices
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8989610308338164506
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032305777346387316}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.120848015, y: 0.10028946, z: 0.011474675}
+  m_Center: {x: -0.018948538, y: 0.023755997, z: 0.0026115405}
 --- !u!1 &5729372673321197648
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +57,6 @@ GameObject:
   - component: {fileID: 4956495870730418922}
   - component: {fileID: 8315572556255769935}
   - component: {fileID: 6089480668046967173}
-  - component: {fileID: 6379223851812954830}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -60,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 5729372673321197648}
   m_LocalRotation: {x: -0.7071068, y: -0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.01894854, y: -0.00087051094, z: 0.023756007}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1386194710839492246}
@@ -116,16 +129,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6379223851812954830
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5729372673321197648}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.008056534, y: 0.006685964, z: 0.0007649783}
-  m_Center: {x: -0.001263236, y: 0.0015837332, z: 0.00017410271}

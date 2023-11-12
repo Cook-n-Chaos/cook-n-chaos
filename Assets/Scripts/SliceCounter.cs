@@ -28,6 +28,8 @@ public class SliceCounter : MonoBehaviour
         }
         GameObject slicedObject = Instantiate(slicedObjectPrefab, new Vector3(position.x, position.y + 0.2f, position.z),
             Quaternion.identity, gameObject.transform);
+
         slicedObject.AddComponent<XRGrabInteractable>();
+        slicedObject.tag = "Stackable";
     }
 }
