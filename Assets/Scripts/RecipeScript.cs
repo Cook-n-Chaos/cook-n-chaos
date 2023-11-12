@@ -41,7 +41,7 @@ public class RecipeScript : MonoBehaviour
         int randomIndex = Random.Range(0, Recipes.Count);
         return Recipes[randomIndex];
     }
-
+    
     private class Recipe
     {
         public string Name { get; set; }
@@ -96,5 +96,68 @@ public class RecipeScript : MonoBehaviour
             },
             Points = 10
         };
+    }
+
+    private bool RecipeChecker(Recipe newRecipe)
+    {
+        for (int i = 0; i < Recipes.Count; i++)
+        {
+            if (AreRecipesEqual(Recipes[i], newRecipe))
+            {
+                // The new recipe is equal to an existing recipe, remove it
+                Score.instance.AddScore(Recipes[i].Points);
+                Recipes.RemoveAt(i);
+                return true;
+            }
+        }
+
+        // No match found, the new recipe is unique
+        return false;
+    }
+
+    private bool AreRecipesEqual(Recipe recipe1, Recipe recipe2)
+    {
+        // Check if the names are the same
+        bool namesEqual = recipe1.Name == recipe2.Name;
+
+        // Check if the descriptions are the same
+        bool descriptionsEqual = recipe1.Description == recipe2.Description;
+
+        // Check if the ingredient lists are the same
+        bool ingredientsEqual = AreIngredientListsEqual(recipe1.Ingredients, recipe2.Ingredients);
+
+        // Check if the points are the same
+        bool pointsEqual = recipe1.Points == recipe2.Points;
+
+        // The recipes are equal if all the above conditions are true
+        return namesEqual && descriptionsEqual && ingredientsEqual && pointsEqual;
+    }
+
+    private bool AreIngredientListsEqual(List<Ingredient> list1, List<Ingredient> list2)
+    {
+        // Check if the count is the same
+        if (list1.Count != list2.Count)
+        {
+            return false;
+        }
+
+        // Check each ingredient in the list
+        for (int i = 0; i < list1.Count; i++)
+        {
+            // Check if the ingredients are equal
+            if (!AreIngredientsEqual(list1[i], list2[i]))
+            {
+                return false;
+            }
+        }
+
+        // All ingredients are equal
+        return true;
+    }
+
+    private bool AreIngredientsEqual(Ingredient ingredient1, Ingredient ingredient2)
+    {
+        // Check if the names and amounts are the same
+        return ingredient1.Name == ingredient2.Name && ingredient1.Ammount == ingredient2.Ammount;
     }
 }
