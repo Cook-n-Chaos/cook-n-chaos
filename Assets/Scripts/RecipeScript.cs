@@ -6,6 +6,8 @@ using System.Linq;
 
 public class RecipeScript : MonoBehaviour
 {
+    public static RecipeScript instance;
+
     private List<Recipe> Recipes = new();
 
     public TextMeshProUGUI RecipeNameText;
@@ -15,18 +17,14 @@ public class RecipeScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+
         Recipes.Add(RecipesDefinition.Burger);
 
         var recipe = GetRandomRecipe();
         RecipeNameText.text = recipe.Name;
         RecipeIngredientsText.text = GetFormattedIngredients(recipe.Ingredients);
         RecipePointsText.text = recipe.Points.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     string GetFormattedIngredients(List<Ingredient> ingredients)
@@ -53,7 +51,7 @@ public class RecipeScript : MonoBehaviour
         public int Points { get; set; }
     }
 
-    private class Ingredient
+    public class Ingredient
     {
         public string Name { get; set; }
 
@@ -90,7 +88,7 @@ public class RecipeScript : MonoBehaviour
                 },
                 new Ingredient()
                 {
-                    Name = "Tomatos",
+                    Name = "Tomatoes",
                     Ammount = 1
                 }
             },
@@ -98,66 +96,40 @@ public class RecipeScript : MonoBehaviour
         };
     }
 
-    private bool RecipeChecker(Recipe newRecipe)
+    public int CheckIfThereIsRecipeWithTheseIngredients(List<Ingredient> list)
     {
-        for (int i = 0; i < Recipes.Count; i++)
+        int score = -1;
+        foreach(Recipe recipe in Recipes)
         {
-            if (AreRecipesEqual(Recipes[i], newRecipe))
+            if(AreIngredientListsEqual(recipe.Ingredients, list))
             {
-                // The new recipe is equal to an existing recipe, remove it
-                Score.instance.AddScore(Recipes[i].Points);
-                Recipes.RemoveAt(i);
-                return true;
+                score = recipe.Points;
+                Recipes.Remove(recipe);
+                return score;
             }
         }
-
-        // No match found, the new recipe is unique
-        return false;
+        return score;
     }
-
-    private bool AreRecipesEqual(Recipe recipe1, Recipe recipe2)
-    {
-        // Check if the names are the same
-        bool namesEqual = recipe1.Name == recipe2.Name;
-
-        // Check if the descriptions are the same
-        bool descriptionsEqual = recipe1.Description == recipe2.Description;
-
-        // Check if the ingredient lists are the same
-        bool ingredientsEqual = AreIngredientListsEqual(recipe1.Ingredients, recipe2.Ingredients);
-
-        // Check if the points are the same
-        bool pointsEqual = recipe1.Points == recipe2.Points;
-
-        // The recipes are equal if all the above conditions are true
-        return namesEqual && descriptionsEqual && ingredientsEqual && pointsEqual;
-    }
-
     private bool AreIngredientListsEqual(List<Ingredient> list1, List<Ingredient> list2)
     {
-        // Check if the count is the same
-        if (list1.Count != list2.Count)
-        {
-            return false;
-        }
+        IngredientComparer comparer = new IngredientComparer();
 
-        // Check each ingredient in the list
-        for (int i = 0; i < list1.Count; i++)
-        {
-            // Check if the ingredients are equal
-            if (!AreIngredientsEqual(list1[i], list2[i]))
-            {
-                return false;
-            }
-        }
+        // Check if both lists contain the same ingredients with the same amounts
+        bool listsAreEqual = list1.Count == list2.Count && list1.All(i => list2.Contains(i, comparer));
 
-        // All ingredients are equal
-        return true;
+        return listsAreEqual;
     }
 
-    private bool AreIngredientsEqual(Ingredient ingredient1, Ingredient ingredient2)
+    public class IngredientComparer : IEqualityComparer<Ingredient>
     {
-        // Check if the names and amounts are the same
-        return ingredient1.Name == ingredient2.Name && ingredient1.Ammount == ingredient2.Ammount;
+        public bool Equals(Ingredient x, Ingredient y)
+        {
+            return x.Name == y.Name && x.Ammount == y.Ammount;
+        }
+
+        public int GetHashCode(Ingredient obj)
+        {
+            return obj.Name.GetHashCode() ^ obj.Ammount.GetHashCode();
+        }
     }
 }

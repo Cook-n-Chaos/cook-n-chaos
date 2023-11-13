@@ -4,11 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class StackingItemPlace : MonoBehaviour
+public class StackingItemPlace : StoredIngriedeints
 {
     private string stackableTag = "Stackable";
     private float stackOffset = 0.015f;
 
+    [SerializeField] private Transform startingPlacingPosition;
     private Vector3 currentStackPosition = Vector3.zero;
 
     private void OnTriggerEnter(Collider other)
@@ -30,11 +31,7 @@ public class StackingItemPlace : MonoBehaviour
         // Calculate the new position for stacking
         currentStackPosition += stackOffsetVector;
 
-        // Set the new position for the object
-        obj.transform.position = gameObject.transform.position + currentStackPosition;
-
-        // Set the object's rotation to the stacking position
-        obj.transform.rotation = Quaternion.identity;
+        
 
         
 
@@ -59,7 +56,16 @@ public class StackingItemPlace : MonoBehaviour
             Destroy(objCollider);
         }
 
+        // Set the object's rotation to the stacking position
+        obj.transform.rotation = Quaternion.identity;
+
+        // Set the new position for the object
+        obj.transform.position = startingPlacingPosition.position + currentStackPosition;
+
+        
         // Parent the object to this GameObject
         obj.transform.parent = transform;
+        AddIngredient(obj.GetComponent<Product>().name);
+        
     }
 }
