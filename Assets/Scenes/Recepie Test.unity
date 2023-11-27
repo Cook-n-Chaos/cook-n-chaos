@@ -183,8 +183,8 @@ MonoBehaviour:
     m_Bottom: 15
   m_ChildAlignment: 1
   m_Spacing: 5
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -245,6 +245,13 @@ MonoBehaviour:
     Object: {fileID: 919132149155446097, guid: 73e3e3d689a27be46937ffdb5e46a180, type: 3}
   - Name: Patty
     Object: {fileID: 919132149155446097, guid: d8da73581dbefa9418674e44bfa10b5f, type: 3}
+  - Name: Tomatoes
+    Object: {fileID: 919132149155446097, guid: 108a6709e64720a4b90c202b86178744, type: 3}
+  - Name: Lettuce
+    Object: {fileID: 919132149155446097, guid: 7ebcefd867d39f34e84b324c7eccd6d6, type: 3}
+  - Name: Carrots
+    Object: {fileID: 919132149155446097, guid: 607f50a2ecfffd740825ff6a66018ea6, type: 3}
+  levelTimer: 25
   Recipe: {fileID: 7559672290555429698, guid: 969ac376d41042d4da3f81232954a5d5, type: 3}
 --- !u!1 &88921642
 GameObject:
