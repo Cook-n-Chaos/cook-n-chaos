@@ -17,4 +17,5 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(stackablePlate, placeToSpawnPlates.position, Quaternion.identity);
     }
+
 }
