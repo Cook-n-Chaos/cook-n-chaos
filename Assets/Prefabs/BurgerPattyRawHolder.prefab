@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cd0328ff3583148a7fa14e3e39b962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: RawMeat
+  name: Patty
 --- !u!114 &4606950179737303992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,9 +244,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelBefore: {fileID: 8374064401213137815}
-  modelAfter: {fileID: 919132149155446097, guid: d8da73581dbefa9418674e44bfa10b5f,
+  modelAfter: {fileID: 919132149155446097, guid: 742d845a64b27b449900d945016e52dc,
     type: 3}
-  toChangeProductName: Meat
+  toChangeProductName: Patty
 --- !u!1001 &8716663088562085574
 PrefabInstance:
   m_ObjectHideFlags: 0

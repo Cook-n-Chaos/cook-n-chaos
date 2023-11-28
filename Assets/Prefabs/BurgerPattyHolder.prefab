@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cd0328ff3583148a7fa14e3e39b962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Meat
+  name: Patty
 --- !u!1001 &5891709817087614069
 PrefabInstance:
   m_ObjectHideFlags: 0

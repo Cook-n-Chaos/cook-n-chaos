@@ -12,7 +12,7 @@ public class DeliverPoint : MonoBehaviour
             StoredIngriedeints storedIngriedeints = go.GetComponent<StoredIngriedeints>();
             if (storedIngriedeints == null)
                 return;
-            int score = RecipeScript.instance.CheckIfThereIsRecipeWithTheseIngredients(storedIngriedeints.ingredients);
+            int score = RecipieManager.instance.CheckIfThereIsRecipeWithTheseIngredients(storedIngriedeints.ingredients);
             if (score > 0)
             {
                 Debug.Log("Correct Recipe Deliverd");

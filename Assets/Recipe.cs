@@ -12,6 +12,7 @@ public class Recipe : MonoBehaviour
     public TextMeshProUGUI pointsLabel;
 
     public List<GameObject> ingredients = new();
+    public RecipieManager.RecipeValues recipeValues;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class Recipe : MonoBehaviour
     {
         initialTime -= Time.deltaTime;
         if (initialTime < 0) {
+            RecipieManager.instance.RemoveRecipeFromCurrentList(recipeValues);
             Destroy(gameObject);
         } else {
             timer.value = initialTime;
