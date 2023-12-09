@@ -4,29 +4,45 @@ using UnityEngine;
 
 public class ChangeToCooked : MonoBehaviour
 {
+    [SerializeField] private Transform modelPlace;
+    private GameObject currentModel;
     [SerializeField] private GameObject modelBefore;
-    [SerializeField] private GameObject modelAfter;
+    [SerializeField] private GameObject modelCooked;
+    [SerializeField] private GameObject modelBurned;
     private Product product;
-    [SerializeField] private string toChangeProductName = "empty";
 
     private void Awake()
     {
         product = gameObject.GetComponent<Product>();
+        currentModel = modelBefore;
     }
     public void ChangeToCookedModel()
+    {
+        ChangeModel(modelCooked, "Patty");
+    }
+    public void ChangeToBurnedModel()
+    {
+        ChangeModel(modelBurned, "burnedPatty");
+    }
+    public void ChangeModel(GameObject toChangeToModel, string name)
     {
         Vector3 position = modelBefore.transform.position;
         Quaternion rotation = modelBefore.transform.rotation;
 
-        Instantiate(modelAfter, position, rotation, transform);
-        gameObject.layer = 0;
-        ChangeProductName();
+        GameObject newModel = Instantiate(toChangeToModel, position, rotation, modelPlace);       
+        ChangeProductName(name);
 
-        Destroy(modelBefore);
+        Destroy(currentModel);
+        currentModel = newModel;
     }
 
-    private void ChangeProductName()
+    public void ChangeLayer()
     {
-        product.name = toChangeProductName;
+        gameObject.layer = 0;
+    }
+
+    private void ChangeProductName(string name)
+    {
+        product.name = name;
     }
 }
