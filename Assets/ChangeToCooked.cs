@@ -10,6 +10,8 @@ public class ChangeToCooked : MonoBehaviour
     [SerializeField] private GameObject modelCooked;
     [SerializeField] private GameObject modelBurned;
     private Product product;
+    public bool burned = false;
+    private Overn overnIWasCookedIn;
 
     private void Awake()
     {
@@ -23,11 +25,14 @@ public class ChangeToCooked : MonoBehaviour
     public void ChangeToBurnedModel()
     {
         ChangeModel(modelBurned, "burnedPatty");
+        BurnItem();
     }
     public void ChangeModel(GameObject toChangeToModel, string name)
     {
-        Vector3 position = modelBefore.transform.position;
-        Quaternion rotation = modelBefore.transform.rotation;
+        if (currentModel == null)
+            return;
+        Vector3 position = currentModel.transform.position;
+        Quaternion rotation = currentModel.transform.rotation;
 
         GameObject newModel = Instantiate(toChangeToModel, position, rotation, modelPlace);       
         ChangeProductName(name);
@@ -38,11 +43,39 @@ public class ChangeToCooked : MonoBehaviour
 
     public void ChangeLayer()
     {
+        Debug.Log("change to default layer");
+        RemoveOven();
         gameObject.layer = 0;
+    }
+    public void ChangeLayerToCookable()
+    {
+        Debug.Log("change to cookable layer");
+        gameObject.layer = 8;
+    }
+    public void SetOven(Overn oven)
+    {
+        overnIWasCookedIn = oven;
+    }
+    private void RemoveOven()
+    {
+        if (overnIWasCookedIn == null)
+            return;
+        overnIWasCookedIn.ObjectLeft();
+        overnIWasCookedIn = null;
     }
 
     private void ChangeProductName(string name)
     {
         product.name = name;
+    }
+
+    public void BurnItem()
+    {
+        burned = true;
+    }
+
+    public bool GetIsBurned()
+    {
+        return burned;
     }
 }

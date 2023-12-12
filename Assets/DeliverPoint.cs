@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DeliverPoint : MonoBehaviour
 {
+    [SerializeField] ParticleSystem _deliverItemParticles;
+    [SerializeField] ParticleSystem _deliverWrongItemParticles;
     private void OnTriggerEnter(Collider other)
     {
         GameObject go = other.gameObject;
@@ -16,11 +18,14 @@ public class DeliverPoint : MonoBehaviour
             if (score > 0)
             {
                 Debug.Log("Correct Recipe Deliverd");
+                Instantiate(_deliverItemParticles, go.transform.position, Quaternion.identity);
+                RecipieManager.instance.DeliverRecipe();
                 Score.instance.AddScore(score);
                 Destroy(go);
             }
             else
             {
+                Instantiate(_deliverWrongItemParticles, go.transform.position, Quaternion.identity);
                 Debug.Log("Wrong Recipe Delivered");
             }
                 

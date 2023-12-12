@@ -9,6 +9,10 @@ public class Overn : MonoBehaviour
     public float burnedTime = 10.0f; // Set the burned time in seconds
     public Slider cookingSlider; // Reference to the UI slider
 
+    [SerializeField] Transform cookingLocation;
+    [SerializeField] ParticleSystem cookingParticles;
+
+
     private Coroutine cookingCoroutine;
 
     private void Start()
@@ -19,11 +23,18 @@ public class Overn : MonoBehaviour
         }
         else
         {
-            cookingSlider.maxValue = cookingTime;
             cookingSlider.value = 0;
         }
     }
+    public void ObjectLeft()
+    {
+        StopCoroutine(cookingCoroutine); // Stop the cooking coroutine
+        cookingSlider.value = 0; // Reset the slider value
 
+        cookingParticles.gameObject.SetActive(false);
+
+        this.cookingObject = null;
+    }
     private void OnTriggerEnter(Collider other)
     {
         GameObject go = other.gameObject;
@@ -34,8 +45,18 @@ public class Overn : MonoBehaviour
                 StopCoroutine(cookingCoroutine); // Stop previous cooking coroutine
                 cookingSlider.value = 0; // Reset slider if a new object enters before cooking ends
             }
+            ChangeToCooked temp = go.GetComponent<ChangeToCooked>();
+            
 
-            cookingObject = go.GetComponent<ChangeToCooked>();
+            if (temp == null || temp.GetIsBurned())
+                return;
+            cookingObject = temp;
+            cookingParticles.gameObject.SetActive(true);
+            go.transform.position = cookingLocation.position;
+            go.transform.rotation = Quaternion.identity;
+            go.transform.parent = transform;
+            cookingObject.SetOven(this);
+            
             cookingCoroutine = StartCoroutine(CookObject(cookingObject, cookingTime));
         }
     }
@@ -49,6 +70,7 @@ public class Overn : MonoBehaviour
             cookingSlider.value = 0; // Reset the slider value
 
             cookingObject.ChangeLayer();
+            cookingParticles.gameObject.SetActive(false);
 
             this.cookingObject = null;
         }
@@ -60,17 +82,15 @@ public class Overn : MonoBehaviour
         while (timer < time)
         {
             timer += Time.deltaTime;
-            cookingSlider.value = timer;
+            cookingSlider.value = timer / time;
             yield return null;
         }
 
         objToCook.ChangeToCookedModel();
         cookingSlider.value = 0;
 
-        yield return new WaitForSeconds(1.0f); // Wait for a second after cooking
-
         // Start the burned timer
-        StartCoroutine(BurnObject(objToCook, burnedTime));
+        cookingCoroutine = StartCoroutine(BurnObject(objToCook, burnedTime));
     }
 
     IEnumerator BurnObject(ChangeToCooked objToBurn, float time)
@@ -79,6 +99,7 @@ public class Overn : MonoBehaviour
         while (timer < time)
         {
             timer += Time.deltaTime;
+            cookingSlider.value = timer / time;
             yield return null;
         }
 

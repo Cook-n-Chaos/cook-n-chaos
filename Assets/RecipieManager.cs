@@ -9,10 +9,11 @@ public class RecipieManager : MonoBehaviour
     public static RecipieManager instance;
     public List<Ingredient> Ingredients = new();
 
-    [SerializeField] private float levelTimer = 500f;
+    [SerializeField] private float levelTimer = 50f;
     private float lastTimer;
-    [SerializeField] private int recipesPerLevel = 5;
+    [SerializeField] private int recipesPerLevel = 1;
     private int spawnedRecipes = 0;
+    private int deliveredRecipesThisLevel = 0;
 
     public GameObject Recipe;
     private List<Tuple<RecipeValues, GameObject>> currentRecipesToDeliver = new List<Tuple<RecipeValues, GameObject>>();
@@ -21,9 +22,21 @@ public class RecipieManager : MonoBehaviour
     {
         instance = this;
     }
-    void Start()
+    public void DeliverRecipe()
     {
+        deliveredRecipesThisLevel++;
+        if(deliveredRecipesThisLevel >= recipesPerLevel)
+        {
+            GameManager.Instance.ShowStartLevelMenu();
+        }
+    }
+
+    public void StartNewTimer()
+    {
+        recipesPerLevel += 1;
         lastTimer = levelTimer;
+        deliveredRecipesThisLevel = 0;
+        spawnedRecipes = 0;
     }
 
     // Update is called once per frame

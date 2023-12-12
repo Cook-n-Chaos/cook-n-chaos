@@ -83,7 +83,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6762943403834822487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +230,7 @@ MonoBehaviour:
   - Name: Carrots
     Object: {fileID: 919132149155446097, guid: 607f50a2ecfffd740825ff6a66018ea6, type: 3}
   levelTimer: 25
+  recipesPerLevel: 5
   Recipe: {fileID: 7559672290555429698, guid: 969ac376d41042d4da3f81232954a5d5, type: 3}
 --- !u!1001 &3833571350017807116
 PrefabInstance:

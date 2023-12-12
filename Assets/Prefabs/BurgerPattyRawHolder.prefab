@@ -148,10 +148,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4606950179737303992}
+        m_TargetAssemblyTypeName: ChangeToCooked, Assembly-CSharp
+        m_MethodName: ChangeLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4606950179737303992}
+        m_TargetAssemblyTypeName: ChangeToCooked, Assembly-CSharp
+        m_MethodName: ChangeLayerToCookable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -281,7 +305,7 @@ MonoBehaviour:
     type: 3}
   modelBurned: {fileID: 919132149155446097, guid: 660771cdcd8d59f4f8954e83d25fcb51,
     type: 3}
-  toChangeProductName: Patty
+  burned: 0
 --- !u!1001 &8685021152070071954
 PrefabInstance:
   m_ObjectHideFlags: 0
