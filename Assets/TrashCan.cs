@@ -11,6 +11,7 @@ public class TrashCan : MonoBehaviour
         if (go.layer == 7 || go.tag == "Stackable")
         {
             Instantiate(_trashItemParticles, go.transform.position, Quaternion.identity);
+            AudioManager.Instance.Play("poof");
             Destroy(go);          
         }
     }

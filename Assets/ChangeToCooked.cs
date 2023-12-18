@@ -33,9 +33,11 @@ public class ChangeToCooked : MonoBehaviour
             return;
         Vector3 position = currentModel.transform.position;
         Quaternion rotation = currentModel.transform.rotation;
+        Vector3 scale = currentModel.transform.localScale;
 
         GameObject newModel = Instantiate(toChangeToModel, position, rotation, modelPlace);       
         ChangeProductName(name);
+        newModel.transform.localScale = scale;
 
         Destroy(currentModel);
         currentModel = newModel;

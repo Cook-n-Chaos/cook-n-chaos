@@ -25,7 +25,7 @@ public class StackingItemPlace : StoredIngriedeints
         // Get the collider and size of the object
 
         // Calculate the offset for stacking
-        Vector3 stackOffsetVector = new Vector3(0, stackOffset + 0.0001f, 0);
+        Vector3 stackOffsetVector = new Vector3(0, stackOffset + 0.0025f, 0);
         if (currentStackPosition == Vector3.zero)
             stackOffsetVector -= new Vector3(0, stackOffset, 0);
         // Calculate the new position for stacking

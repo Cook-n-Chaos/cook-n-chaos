@@ -14,7 +14,12 @@ public class Overn : MonoBehaviour
 
 
     private Coroutine cookingCoroutine;
+    AudioSource cookingSource;
 
+    private void Awake()
+    {
+        cookingSource = gameObject.GetComponent<AudioSource>();
+    }
     private void Start()
     {
         if (cookingSlider == null)
@@ -25,6 +30,7 @@ public class Overn : MonoBehaviour
         {
             cookingSlider.value = 0;
         }
+        cookingSource.Stop();
     }
     public void ObjectLeft()
     {
@@ -32,7 +38,7 @@ public class Overn : MonoBehaviour
         cookingSlider.value = 0; // Reset the slider value
 
         cookingParticles.gameObject.SetActive(false);
-
+        cookingSource.Stop();
         this.cookingObject = null;
     }
     private void OnTriggerEnter(Collider other)
@@ -56,7 +62,8 @@ public class Overn : MonoBehaviour
             go.transform.rotation = Quaternion.identity;
             go.transform.parent = transform;
             cookingObject.SetOven(this);
-            
+
+            cookingSource.Play();
             cookingCoroutine = StartCoroutine(CookObject(cookingObject, cookingTime));
         }
     }
@@ -72,6 +79,7 @@ public class Overn : MonoBehaviour
             cookingObject.ChangeLayer();
             cookingParticles.gameObject.SetActive(false);
 
+          
             this.cookingObject = null;
         }
     }

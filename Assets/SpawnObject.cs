@@ -16,5 +16,6 @@ public class SpawnObject : MonoBehaviour
     {
         Instantiate(spawnParticles, positionToSpawn, Quaternion.identity);
         Instantiate(objectToSpawn, positionToSpawn, Quaternion.identity);
+        AudioManager.Instance.Play("poof");
     }
 }

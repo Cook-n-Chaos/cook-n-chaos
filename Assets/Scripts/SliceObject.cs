@@ -27,6 +27,7 @@ public class SliceObject : MonoBehaviour
 
     public void Slice(GameObject target)
     {
+
         Vector3 velocity = velocityEstimator.GetVelocityEstimate();
         Vector3 planeNormal = Vector3.Cross(endSlicePoint.position - startSlicePoint.position, velocity);
         planeNormal.Normalize();
@@ -38,6 +39,7 @@ public class SliceObject : MonoBehaviour
 
         SlicableObject targetSlicableObject = target.GetComponent<SlicableObject>();
         SliceCounter counter = targetSlicableObject.parentHolder;
+        AudioManager.Instance.Play("chop");
         if (counter.IncreaseSliceAmount())
         {
             counter.ChangeObject(target.transform.position);
@@ -58,8 +60,9 @@ public class SliceObject : MonoBehaviour
 
             StartCoroutine(SetSlicable(upperHull, lowerHull, 0.35f));
 
-            
            
+
+
 
             Destroy(target);
         }

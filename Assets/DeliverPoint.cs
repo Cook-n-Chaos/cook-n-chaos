@@ -18,6 +18,7 @@ public class DeliverPoint : MonoBehaviour
             if (score > 0)
             {
                 Debug.Log("Correct Recipe Deliverd");
+                AudioManager.Instance.Play("correct");
                 Instantiate(_deliverItemParticles, go.transform.position, Quaternion.identity);
                 RecipieManager.instance.DeliverRecipe();
                 Score.instance.AddScore(score);
@@ -26,7 +27,9 @@ public class DeliverPoint : MonoBehaviour
             else
             {
                 Instantiate(_deliverWrongItemParticles, go.transform.position, Quaternion.identity);
+                AudioManager.Instance.Play("wrong");
                 Debug.Log("Wrong Recipe Delivered");
+                Destroy(go);
             }
                 
         }

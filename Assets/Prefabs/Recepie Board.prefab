@@ -220,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ingredients:
   - Name: Bun
-    Object: {fileID: 919132149155446097, guid: 73e3e3d689a27be46937ffdb5e46a180, type: 3}
+    Object: {fileID: 919132149155446097, guid: 68a33efca7b861c4e98ac7b326ba68c7, type: 3}
   - Name: Patty
     Object: {fileID: 919132149155446097, guid: d8da73581dbefa9418674e44bfa10b5f, type: 3}
   - Name: Tomatoes
