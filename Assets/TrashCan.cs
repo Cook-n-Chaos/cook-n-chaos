@@ -12,7 +12,23 @@ public class TrashCan : MonoBehaviour
         {
             Instantiate(_trashItemParticles, go.transform.position, Quaternion.identity);
             AudioManager.Instance.Play("poof");
-            Destroy(go);          
+            Destroy(go);
+            return;
+        }
+        if(go.layer == 6)
+        {
+            Instantiate(_trashItemParticles, go.transform.position, Quaternion.identity);
+            if (go.transform.parent.GetComponent<SliceCounter>() != null)
+            {
+                if(go.transform.parent.childCount > 1)
+                {
+                    Destroy(go);
+                }
+                else
+                {
+                    Destroy(go.transform.parent.gameObject);
+                }
+            }
         }
     }
 }

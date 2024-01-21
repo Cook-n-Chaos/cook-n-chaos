@@ -37,6 +37,7 @@ public class Recipe : MonoBehaviour
         initialTime -= Time.deltaTime;
         if (initialTime < 0) {
             RecipieManager.instance.RemoveRecipeFromCurrentList(recipeValues);
+            RecipieManager.instance.DeliverRecipe();
             Destroy(gameObject);
         } else {
             timer.value = initialTime;

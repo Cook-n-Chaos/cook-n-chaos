@@ -72,8 +72,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
         audioSource.clip = s.clip;
-        audioSource.loop = s.loop; // Set the loop property based on the sound's shouldLoop flag
-        audioSource.PlayOneShot(s.clip);
+        audioSource.Play();
     }
 
     public void Play(string sound)

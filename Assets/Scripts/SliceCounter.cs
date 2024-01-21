@@ -13,7 +13,7 @@ public class SliceCounter : MonoBehaviour
     {
         currentSliceAmount++;
 
-        if (currentSliceAmount == neededSliceAmount)
+        if (currentSliceAmount >= neededSliceAmount)
         {           
             return true;
         }

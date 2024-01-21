@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject stackablePlate;
     [SerializeField] private Transform placeToSpawnPlates;
     [SerializeField] private GameObject startLevelMenu;
+    [SerializeField] private int lives = 3;
 
     private void Start()
     {
@@ -27,5 +28,14 @@ public class GameManager : MonoBehaviour
     {
         RecipieManager.instance.StartNewTimer();
         startLevelMenu.SetActive(false);
+    }
+
+    public void ReduceLife()
+    {
+        lives--;
+        if(lives <= 0)
+        {
+            Debug.Log("Game Over!");
+        }
     }
 }
